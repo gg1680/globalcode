@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script src="//code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf-8">
+	    var socket = io();
+	    socket.on('connect', function() {
+	        socket.emit('my_event', {data: 'Connected!'});
+	    });
+
+	    window.setInterval(function() {
+            socket.emit('my_ping');
+        }, 3000);
+
+        // Handler for "pong" message (every three seconds)
+        // This bumps up counter and puts value in #ping-pong element
+        var counter = 0;
+        socket.on('my_pong', function() {
+            counter = counter + 1;
+            $('#ping-pong').text(counter);
+        });
+	</script>
+</head>
+	<body>
+		<p>ping pong count: <span id="ping-pong"></span></p>
+	</body>
+</html>
