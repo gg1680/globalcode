@@ -1,2 +1,8 @@
 # globalcode
- 2019
+ 
+
+See branches for examples:
+- flask
+- postgres
+- geocoder
+- socketio
